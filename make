@@ -62,7 +62,7 @@ script_repo="https://github.com/lynxnexy/luci-app-amlogic/tree/main/luci-app-aml
 kernel_repo="https://github.com/ophub/kernel/tree/main/pub"
 version_branch="stable"
 auto_kernel="false"
-build_kernel=("5.15.72" "5.19.14")
+build_kernel=("6.0.5")
 # Set supported SoC
 build_openwrt=(
     "hg680p"
