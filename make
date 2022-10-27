@@ -417,7 +417,7 @@ EOF
     # Realtek RTL8189FS Wireless LAN Driver
     echo "8189fs" >etc/modules.d/8189fs
     # Realtek RTL8188FU Wireless LAN Driver
-    echo "rtl8188fu" >etc/modules.d/rtl8188fu
+    # echo "rtl8188fu" >etc/modules.d/rtl8188fu
     # Realtek RTL8188EU USB Wireless LAN Driver
     echo "8188eu" >etc/modules.d/8188eu
     # Realtek RTL8188GU USB Wireless LAN Driver
