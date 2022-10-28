@@ -25,34 +25,34 @@ jobs:
     runs-on: ubuntu-22.04
     if: github.event.repository.owner.id == github.event.sender.id
 
-  steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Initialization environment
-      id: init
-      env:
-        DEBIAN_FRONTEND: noninteractive
-      run: |
-        sudo timedatectl set-timezone "${TZ}"
-        echo "status=success" >> ${GITHUB_OUTPUT}
+      - name: Initialization environment
+        id: init
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          sudo timedatectl set-timezone "${TZ}"
+          echo "status=success" >> ${GITHUB_OUTPUT}
 
-    - name: Delete older releases
-      uses: dev-drprasad/delete-older-releases@master
-      if: env.DELETE_RELEASE == 'true'
-      with:
-        keep_latest: ${{ env.KEEP_MININUM_RELEASE }}
-        delete_tags: true
-        delete_tag_pattern: _
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: Delete older releases
+        uses: dev-drprasad/delete-older-releases@master
+        if: env.DELETE_RELEASE == 'true'
+        with:
+          keep_latest: ${{ env.KEEP_MININUM_RELEASE }}
+          delete_tags: true
+          delete_tag_pattern: _
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
-    - name: Delete older workflow runs and artifacts
-      uses: Mattraks/delete-workflow-runs@main
-      if: env.DELETE_ARTIFACTS == 'true'
-      with:
-        token: ${{ secrets.GH_TOKEN }}
-        repository: ${{ github.repository }}
-        retain_days: ${{ env.KEEP_DAY }}
-        keep_minimum_runs: ${{ env.KEEP_MININUM_RUNS }}
+      - name: Delete older workflow runs and artifacts
+        uses: Mattraks/delete-workflow-runs@main
+        if: env.DELETE_ARTIFACTS == 'true'
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          repository: ${{ github.repository }}
+          retain_days: ${{ env.KEEP_DAY }}
+          keep_minimum_runs: ${{ env.KEEP_MININUM_RUNS }}
 
