@@ -18,7 +18,8 @@ env:
   DELETE_ARTIFACTS: true
   KEEP_DAY: 1
   KEEP_MININUM_RUNS: 0
-  KEEP_MININUM_RELEASE: 4
+  KEEP_MININUM_RELEASE: 
+  TZ: Asia/Jakarta
 
 jobs:
   build:
