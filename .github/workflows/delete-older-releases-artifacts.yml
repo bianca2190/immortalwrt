@@ -24,7 +24,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-22.04
-    if: github.event.repository.owner.id == github.event.sender.id
+    if: ${{ github.event.repository.owner.id }} == ${{ github.event.sender.id }}
 
     steps:
       - name: Checkout
@@ -37,23 +37,21 @@ jobs:
         run: |
           sudo timedatectl set-timezone "${TZ}"
           echo "status=success" >> ${GITHUB_OUTPUT}
-
       - name: Delete older releases
         uses: dev-drprasad/delete-older-releases@master
-        if: env.DELETE_RELEASE == 'true'
+        if: ${{ github.event.inputs.delete_older_releases }} == 'true'
         with:
-          keep_latest: ${{ env.KEEP_MININUM_RELEASE }}
-          delete_tags: true
-          delete_tag_pattern: _
+          keep_latest: ${{ github.event.inputs.keep_latest }}
+          delete_tags: ${{ github.event.inputs.delete_tags }}
+          delete_tag_pattern: ${{ github.event.inputs.delete_tag_pattern }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Delete older workflow runs and artifacts
         uses: Mattraks/delete-workflow-runs@main
-        if: env.DELETE_ARTIFACTS == 'true'
+        if: ${{ github.event.inputs.delete_workflow_runs }} == 'true'
         with:
           token: ${{ secrets.GH_TOKEN }}
           repository: ${{ github.repository }}
-          retain_days: ${{ env.KEEP_DAY }}
-          keep_minimum_runs: ${{ env.KEEP_MININUM_RUNS }}
-
+          retain_days: ${{ github.event.inputs.retain_days }}
+          keep_minimum_runs: ${{ github.event.inputs.keep_minimum_runs }}
