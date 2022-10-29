@@ -51,6 +51,9 @@ svn co https://github.com/lynxnexy/luci-app-atinout-mod/trunk package/luci-app-a
 # Add luci-app-amlogic
 svn co https://github.com/lynxnexy/luci-app-amlogic/trunk package/luci-app-amlogic
 
+# Add homeproxy
+svn co https://github.com/immortalwrt/homeproxy/trunk package/homeproxy
+
 # Add p7zip
 svn co https://github.com/hubutui/p7zip-lede/trunk package/p7zip
 
